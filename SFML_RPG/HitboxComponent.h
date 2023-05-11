@@ -1,8 +1,6 @@
-#ifndef HITBOXCOMPONENT_H
-#define HITBOXCOMPONENT_H
+#pragma once
 
-class HitboxComponent
-{
+class HitboxComponent{
 private:
 	sf::Sprite& sprite;
 	sf::RectangleShape hitbox;
@@ -16,20 +14,17 @@ public:
 		float width, float height);
 	virtual ~HitboxComponent();
 
-	//Accessors
+	//Dostop
 	const sf::Vector2f& getPosition() const;
 	const sf::FloatRect getGlobalBounds() const;
 	const sf::FloatRect& getNextPosition(const sf::Vector2f& velocity);
 
-	//Modifiers
 	void setPosition(const sf::Vector2f& position);
 	void setPosition(const float x, const float y);
 
-	//Functions
+	//Funkcije
 	bool intersects(const sf::FloatRect& frect);
 
 	void update();
 	void render(sf::RenderTarget& target);
 };
-
-#endif

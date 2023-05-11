@@ -2,34 +2,26 @@
 #include "MovementComponent.h"
 
 MovementComponent::MovementComponent(sf::Sprite& sprite, 
-	float maxVelocity, float acceleration, float deceleration)
-	: sprite(sprite),
-	maxVelocity(maxVelocity), acceleration(acceleration), deceleration(deceleration)
-{
+	float maxVelocity, float acceleration, float deceleration) : sprite(sprite), maxVelocity(maxVelocity), acceleration(acceleration), deceleration(deceleration){
 	
 }
 
-MovementComponent::~MovementComponent()
-{
+MovementComponent::~MovementComponent(){
 
 }
 
-//Accessors
-const float & MovementComponent::getMaxVelocity() const
-{
+//Dostop
+const float & MovementComponent::getMaxVelocity() const{
 	return this->maxVelocity;
 }
 
-const sf::Vector2f & MovementComponent::getVelocity() const
-{
+const sf::Vector2f & MovementComponent::getVelocity() const{
 	return this->velocity;
 }
 
-//Functions
-const bool MovementComponent::getState(const short unsigned state) const
-{
-	switch (state)
-	{
+//Funkcije
+const bool MovementComponent::getState(const short unsigned state) const{
+	switch (state){
 	case IDLE:
 
 		if (this->velocity.x == 0.f && this->velocity.y == 0.f)
@@ -76,46 +68,37 @@ const bool MovementComponent::getState(const short unsigned state) const
 	return false;
 }
 
-void MovementComponent::stopVelocity()
-{
-	/* Resets the velocity to 0.*/
+void MovementComponent::stopVelocity(){
+	// resetira velocity
 
 	this->velocity.x = 0.f;
 	this->velocity.y = 0.f;
 }
 
-void MovementComponent::stopVelocityX()
-{
-	/* Resets the velocity x to 0.*/
+void MovementComponent::stopVelocityX(){
+	// resteria sam x od velocity
 
 	this->velocity.x = 0.f;
 }
 
-void MovementComponent::stopVelocityY()
-{
-	/* Resets the velocity y to 0.*/
+void MovementComponent::stopVelocityY(){
+	//resetira sam y od velocity
 
 	this->velocity.y = 0.f;
 }
 
-void MovementComponent::move(const float dir_x, const float dir_y, const float& dt)
-{
-	/* Accelerating a sprite until it reaches the max velocity. */
+void MovementComponent::move(const float dir_x, const float dir_y, const float& dt){
+	//Pospešek
 
 	this->velocity.x += this->acceleration * dir_x * dt;
 	this->velocity.y += this->acceleration * dir_y * dt;
 }
 
-void MovementComponent::update(const float & dt)
-{
-	/*
-	Decelerates the sprite and controls the maximum velocity.
-	Moves the sprite.
-	*/
+void MovementComponent::update(const float & dt){
+	//Pospešek sam u drugo stran pa pazi max velocity
 
-	if (this->velocity.x > 0.f) //Check for positive x
-	{
-		//Max velocity check
+	if (this->velocity.x > 0.f){
+		//max velocity
 		if (this->velocity.x > this->maxVelocity)
 			this->velocity.x = this->maxVelocity;
 
@@ -124,8 +107,7 @@ void MovementComponent::update(const float & dt)
 		if (this->velocity.x < 0.f)
 			this->velocity.x = 0.f;
 	}
-	else if(this->velocity.x < 0.f) //Check for negative x
-	{
+	else if(this->velocity.x < 0.f){
 		//Max velocity check
 		if (this->velocity.x < -this->maxVelocity)
 			this->velocity.x = -this->maxVelocity;
@@ -136,8 +118,7 @@ void MovementComponent::update(const float & dt)
 			this->velocity.x = 0.f;
 	}
 	
-	if (this->velocity.y > 0.f) //Check for positive y
-	{
+	if (this->velocity.y > 0.f){
 		//Max velocity check
 		if (this->velocity.y > this->maxVelocity)
 			this->velocity.y = this->maxVelocity;
@@ -147,8 +128,7 @@ void MovementComponent::update(const float & dt)
 		if (this->velocity.y < 0.f)
 			this->velocity.y = 0.f;
 	}
-	else if (this->velocity.y < 0.f) //Check for negative y
-	{
+	else if (this->velocity.y < 0.f){
 		//Max velocity check
 		if (this->velocity.y < -this->maxVelocity)
 			this->velocity.y = -this->maxVelocity;
@@ -159,6 +139,6 @@ void MovementComponent::update(const float & dt)
 			this->velocity.y = 0.f;
 	}
 
-	//Final move
-	this->sprite.move(this->velocity * dt); //Uses velocity
+	//Koncn premik
+	this->sprite.move(this->velocity * dt);
 }

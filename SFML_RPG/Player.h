@@ -1,5 +1,4 @@
-#ifndef PLAYER_H
-#define PLAYER_H
+#pragma once
 
 #include "Entity.h"
 #include "Items.h"
@@ -7,11 +6,9 @@
 
 class Entity;
 
-class Player :
-	public Entity
-{
+class Player : public Entity{
 private:
-	//Variables
+	//Lastnosti
 	Inventory* inventory;
 
 	bool initAttack;
@@ -21,9 +18,9 @@ private:
 	sf::Clock damageTimer;
 	sf::Int32 damageTimerMax;
 
-	//Initializer functions
+	//Inicialozacija
 	void initVariables();
-	void initComponents();
+	void initComponents(sf::Texture& texture_sheet);
 	void initAnimations();
 	void initInventory();
 
@@ -31,7 +28,7 @@ public:
 	Player(float x, float y, sf::Texture& texture_sheet);
 	virtual ~Player();
 	
-	//Accessors
+	//Dostop
 	AttributeComponent* getAttributeComponent();
 	Weapon* getWeapon() const;
 
@@ -42,10 +39,10 @@ public:
 
 	const unsigned getDamage() const;
 
-	//Modifier
+	//Interface
 	void setInitAttack(const bool initAttack);
 
-	//Functions
+	//Funkcije
 	void loseHP(const int hp);
 	void gainHP(const int hp);
 	void loseEXP(const int exp);
@@ -56,5 +53,3 @@ public:
 
 	void render(sf::RenderTarget& target, sf::Shader* shader = NULL, const sf::Vector2f light_position = sf::Vector2f(), const bool show_hitbox = false);
 };
-
-#endif

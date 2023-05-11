@@ -1,5 +1,4 @@
-#ifndef ENTITY_H
-#define ENTITY_H
+#pragma once
 
 #include "HitboxComponent.h"
 #include "MovementComponent.h"
@@ -13,8 +12,7 @@ class AnimationComponent;
 class AttributeComponent;
 class SkillComponent;
 
-class Entity
-{
+class Entity{
 private:
 	void initVariables();
 
@@ -32,9 +30,9 @@ public:
 	Entity();
 	virtual ~Entity();
 
-	//Component functions
+	//Komponente
 	void setTexture(sf::Texture& texture);
-	void createHitboxComponent(sf::Sprite& sprite, 
+	void createHitboxComponent(sf::Sprite& sprite,
 		float offset_x, float offset_y,
 		float width, float height);
 	void createMovementComponent(const float maxVelocity, const float acceleration, const float deceleration);
@@ -43,7 +41,7 @@ public:
 	void createSkillComponent();
 	void createAIComponent();
 
-	//Accessors
+	//Dostop
 	virtual MovementComponent* getMovementComponent();
 	virtual AnimationComponent* getAnimationComponent();
 	virtual AttributeComponent* getAttributeComponent();
@@ -57,22 +55,19 @@ public:
 	virtual const sf::FloatRect getGlobalBounds() const;
 	virtual const sf::FloatRect getNextPositionBounds(const float& dt) const;
 
-	//Modifiers
+	//Interface
 	virtual void setPosition(const float x, const float y);
-	
-	//Functions
+
+	//Funkcije
 	virtual void move(const float x, const float y, const float& dt);
 	virtual void stopVelocity();
 	virtual void stopVelocityX();
 	virtual void stopVelocityY();
 
-	//Calculations
+	//Izracuni
 	virtual const float getDistance(const Entity& entity) const;
 	virtual const float getSpriteDistance(const Entity& entity) const;
 
 	virtual void update(const float& dt, sf::Vector2f& mouse_pos_view, const sf::View& view) = 0;
 	virtual void render(sf::RenderTarget& target, sf::Shader* shader, const sf::Vector2f light_position, const bool show_hitbox) = 0;
 };
-
-#endif
-

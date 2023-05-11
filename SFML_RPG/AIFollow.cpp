@@ -1,19 +1,15 @@
 #include "stdafx.h"
 #include "AIFollow.h"
 
-AIFollow::AIFollow(Entity& self, Entity& entity)
-	: AIOption(self, entity)
-{
+AIFollow::AIFollow(Entity& self, Entity& entity) : AIOption(self, entity){
 
 }
 
-AIFollow::~AIFollow()
-{
+AIFollow::~AIFollow(){
 
 }
 
-void AIFollow::update(const float& dt)
-{
+void AIFollow::update(const float& dt){
 	sf::Vector2f moveVec;
 	moveVec.x = entity.getPosition().x - self.getPosition().x;
 	moveVec.y = entity.getPosition().y - self.getPosition().y;

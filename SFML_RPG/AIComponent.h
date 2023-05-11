@@ -1,11 +1,9 @@
 #pragma once
 
 #include "Entity.h"
-
 #include "AIFollow.h"
 
-class AIComponent
-{
+class AIComponent{
 private:
 	Entity& entity;
 	Entity& self;

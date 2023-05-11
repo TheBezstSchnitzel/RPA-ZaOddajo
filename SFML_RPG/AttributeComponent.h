@@ -1,6 +1,6 @@
 #pragma once
-class AttributeComponent
-{
+
+class AttributeComponent{
 public:
 	//Leveling
 	int level;
@@ -8,14 +8,14 @@ public:
 	int expNext;
 	int attributePoints;
 
-	//Attributes
+	//Atributi
 	int vitality;
 	int strength;
 	int dexterity;
 	int agility;
 	int intelligence;
 	
-	//Stats
+	//Stati
 	int hp;
 	int hpMax;
 	int damageMin;
@@ -24,11 +24,11 @@ public:
 	int defence;
 	int luck;
 
-	//Con / Des
+	//Konstruktor / Destruktor
 	AttributeComponent(int level);
 	virtual ~AttributeComponent();
 
-	//Functions
+	//Funkcije
 	std::string debugPrint() const;
 
 	void loseHP(const int hp);

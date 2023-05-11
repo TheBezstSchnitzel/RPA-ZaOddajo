@@ -1,15 +1,12 @@
-#ifndef ENEMY_H
-#define ENEMY_H
+#pragma once
 
 #include "Entity.h"
 #include "EnemySpawnerTile.h"
 #include "AIFollow.h"
 
-class Enemy :
-	public Entity
-{
+class Enemy : public Entity{
 protected:
-	//Variables
+	//Metode
 	EnemySpawnerTile& enemySpawnerTile;
 	unsigned gainExp;
 	sf::Clock damageTimer;
@@ -17,7 +14,7 @@ protected:
 	sf::Clock despawnTimer;
 	sf::Int32 despawnTimerMax;
 
-	//Initializer functions
+	//Inicializacija
 	virtual void initVariables() = 0;
 	virtual void initAnimations() = 0;
 
@@ -25,16 +22,15 @@ public:
 	Enemy(EnemySpawnerTile& enemy_spawner_tile);
 	virtual ~Enemy();
 
-	//Accessors
+	//Dostop
 	const unsigned& getGainExp() const;
 	EnemySpawnerTile& getEnemySpawnerTile();
 	const bool getDamageTimerDone() const;
 	const bool getDespawnTimerDone() const;
 
-	//Modifiers
 	void resetDamageTimer();
 
-	//Functions
+	//Funkcije
 	virtual void generateAttributes(const unsigned level);
 
 	virtual void loseHP(const int hp);
@@ -47,5 +43,3 @@ public:
 	virtual void update(const float & dt, sf::Vector2f& mouse_pos_view, const sf::View& view) = 0;
 	virtual void render(sf::RenderTarget & target, sf::Shader* shader = NULL, const sf::Vector2f light_position = sf::Vector2f(), const bool show_hitbox = false) = 0;
 };
-
-#endif //!ENEMY_H

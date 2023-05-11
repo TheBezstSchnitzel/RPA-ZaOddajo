@@ -1,8 +1,7 @@
 #pragma once
 #include "AIOption.h"
-class AIFollow :
-    public AIOption
-{
+
+class AIFollow : public AIOption{
 private:
 
 public:

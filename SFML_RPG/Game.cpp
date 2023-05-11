@@ -136,6 +136,7 @@ void Game::run(){
 	this->updateDt();
 	this->update();
 	this->render();
-	if (this->window->isOpen()) run(); //rekurzivna funkcija
+	if (this->window->isOpen()) run();//rekurzivna funkcija
+	else return;
 }
 
