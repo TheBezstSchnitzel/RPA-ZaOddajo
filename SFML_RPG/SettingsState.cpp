@@ -38,7 +38,7 @@ void SettingsState::initGui(){
 		)
 	);
 
-	if (!this->backgroundTexture.loadFromFile("Resources/Images/Backgrounds/bg1.png")){
+	if (!this->backgroundTexture.loadFromFile("Resources/Images/Backgrounds/bg.png")){
 		throw "ERROR::MAIN_MENU_STATE::FAILED_TO_LOAD_BACKGROUND_TEXTURE";
 	}
 
