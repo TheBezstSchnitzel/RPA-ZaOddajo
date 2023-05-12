@@ -133,10 +133,10 @@ void Game::render(){
 }
 
 void Game::run(){
-	this->updateDt();
-	this->update();
-	this->render();
-	if (this->window->isOpen()) run();//rekurzivna funkcija
-	else return;
+	while (this->window->isOpen()) {
+		this->updateDt();
+		this->update();
+		this->render();
+	}
 }
 
