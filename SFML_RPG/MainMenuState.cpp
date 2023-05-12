@@ -128,7 +128,8 @@ void MainMenuState::updateButtons(){
 
 	//Nastavitve
 	if (this->buttons["SETTINGS_STATE"]->isPressed()){
-		this->states->push(new SettingsState(this->stateData));
+		this->states->push(new SettingsState(stateData));
+		this->resetGui();
 	}
 
 	//Editor

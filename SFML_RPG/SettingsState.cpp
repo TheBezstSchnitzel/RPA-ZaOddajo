@@ -31,8 +31,7 @@ void SettingsState::initGui(){
 
 	//Ozadje
 	this->background.setSize(
-		sf::Vector2f
-		(
+		sf::Vector2f(
 			static_cast<float>(vm.width),
 			static_cast<float>(vm.height)
 		)
@@ -96,7 +95,6 @@ void SettingsState::resetGui(){
 		delete it2->second;
 	}
 	this->dropDownLists.clear();
-
 	this->initGui();
 }
 
@@ -150,8 +148,6 @@ void SettingsState::updateGui(const float & dt){
 	for (auto &it : this->dropDownLists){
 		it.second->update(this->mousePosWindow, dt);
 	}
-
-	//Delovanje spustnega seznama
 }
 
 void SettingsState::update(const float& dt){
