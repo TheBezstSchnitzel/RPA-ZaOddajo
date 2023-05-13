@@ -58,7 +58,7 @@ void MainMenuState::initGui(){
 	this->buttons["GAME_STATE"] = new gui::Button(
 		gui::p2pX(15.6f, vm), gui::p2pY(30.f, vm), 
 		gui::p2pX(13.f, vm), gui::p2pY(6.f, vm),
-		&this->font, "New Game", gui::calcCharSize(vm),
+		&this->font, "Play", gui::calcCharSize(vm),
 		sf::Color(200, 200, 200, 200), sf::Color(255, 255, 255, 255), sf::Color(20, 20, 20, 50),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
 	);
@@ -113,6 +113,12 @@ MainMenuState::~MainMenuState(){
 
 
 void MainMenuState::updateInput(const float & dt){
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("CLOSE"))) && this->getKeytime()) {
+		if (!this->paused)
+			this->pauseState();
+		else
+			this->unpauseState();
+	}
 }
 
 void MainMenuState::updateButtons(){
@@ -123,7 +129,8 @@ void MainMenuState::updateButtons(){
 
 	//Nou game
 	if (this->buttons["GAME_STATE"]->isPressed()){
-		this->states->push(new GameState(this->stateData));
+		//this->states->push(new GameState(this->stateData));
+		this->states->push(new PlayGameState(this->stateData));
 	}
 
 	//Nastavitve

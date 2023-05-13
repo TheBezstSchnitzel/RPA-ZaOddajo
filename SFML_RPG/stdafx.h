@@ -17,6 +17,7 @@
 #include <sstream>
 #include <fstream>
 #include <cmath>
+#include <ctime>
 
 //SFML
 #include <SFML\System.hpp>

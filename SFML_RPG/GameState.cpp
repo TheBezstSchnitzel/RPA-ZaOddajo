@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "GameState.h"
 
+//Inicializacija
 void GameState::initDeferredRender(){
 	this->renderTexture.create(
 		this->stateData->gfxSettings->resolution.width,
@@ -18,7 +19,6 @@ void GameState::initDeferredRender(){
 	);
 }
 
-//Inicializacija
 void GameState::initView(){
 	this->view.setSize(
 		sf::Vector2f(
@@ -84,7 +84,7 @@ void GameState::initShaders(){
 }
 
 void GameState::initKeyTime(){
-	this->keyTimeMax = 0.3f;
+	this->keyTimeMax = 0.75f;
 	this->keyTimer.restart();
 }
 

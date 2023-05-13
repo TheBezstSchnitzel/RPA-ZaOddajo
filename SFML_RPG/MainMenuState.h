@@ -4,6 +4,7 @@
 #include "EditorState.h"
 #include "SettingsState.h"
 #include "Gui.h"
+#include "PlayGameState.h"
 
 class MainMenuState : public State{
 private:
