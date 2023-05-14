@@ -11,6 +11,10 @@ private:
 	sf::RectangleShape btnBackground;
 	sf::Font font;
 
+	//Zvok
+	sf::SoundBuffer buffer;
+	sf::Sound click;
+
 	std::map<std::string, gui::Button*> buttons;
 	std::map<std::string, gui::DropDownList*> dropDownLists;
 

@@ -16,6 +16,10 @@ private:
 	sf::RectangleShape btnBackground;
 	std::map<std::string, gui::Button*> buttons;
 
+	//Zvok
+	sf::SoundBuffer buffer;
+	sf::Sound click;
+
 	//Privatne funkcije
 	void initVariables();
 	void initFonts();

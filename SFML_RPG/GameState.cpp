@@ -96,7 +96,7 @@ void GameState::initDebugText(){
 }
 
 void GameState::initPlayers(){
-	this->player = new Player(220, 220, this->textures["PLAYER_SHEET"]);
+	this->player = new Player(300, 220, this->textures["PLAYER_SHEET"]);
 }
 
 void GameState::initPlayerGUI(){
@@ -126,12 +126,12 @@ GameState::GameState(StateData* state_data) : State(state_data){
 	this->initShaders();
 	this->initKeyTime();
 	this->initDebugText();
-
 	this->initPlayers();
 	this->initPlayerGUI();
 	this->initEnemySystem();
 	this->initTileMap();
 	this->initSystems();
+	this->player->gainHP(100);
 }
 
 GameState::~GameState(){

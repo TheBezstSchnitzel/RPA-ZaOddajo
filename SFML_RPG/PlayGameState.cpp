@@ -129,6 +129,11 @@ void PlayGameState::initGui(){
 	this->initTextures();
 	this->initTexts(vm);
 	this->initBackgrounds(vm);
+
+	if (!this->buffer.loadFromFile("Resources/Audio/click.wav")) {
+		throw "ERROR::MAIN_MENU_STATE::FAILED_TO_LOAD_CLICK_SOUND";
+	}
+	this->click.setBuffer(this->buffer);
 	//Gumbi
 	this->buttons["GAME_SAVE_1"] = new gui::Button(
 		gui::p2pX(28.3f, vm), gui::p2pY(13.3f, vm),
@@ -201,19 +206,24 @@ void PlayGameState::updateButtons() {
 
 	//Nou game
 	if (this->buttons["GAME_SAVE_1"]->isPressed()) {
+		this->click.play();
 		this->states->push(new GameState(this->stateData));
 	}
 	if (this->buttons["GAME_SAVE_2"]->isPressed()) {
+		this->click.play();
 		this->states->push(new GameState(this->stateData));
 	}
 	if (this->buttons["GAME_SAVE_3"]->isPressed()) {
+		this->click.play();
 		this->states->push(new GameState(this->stateData));
 	}
 	if (this->buttons["GAME_SAVE_4"]->isPressed()) {
+		this->click.play();
 		this->states->push(new GameState(this->stateData));
 	}
 	//Exit
 	if (this->buttons["EXIT"]->isPressed()) {
+		this->click.play();
 		this->endState();
 	}
 }

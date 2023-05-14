@@ -3,6 +3,10 @@
 
 //Inicializacija
 void MainMenuState::initVariables(){
+	if (!this->buffer.loadFromFile("Resources/Audio/click.wav")) {
+		throw "ERROR::MAIN_MENU_STATE::FAILED_TO_LOAD_CLICK_SOUND";
+	}
+	this->click.setBuffer(this->buffer);
 }
 
 void MainMenuState::initFonts(){
@@ -129,23 +133,27 @@ void MainMenuState::updateButtons(){
 
 	//Nou game
 	if (this->buttons["GAME_STATE"]->isPressed()){
+		this->click.play();
 		//this->states->push(new GameState(this->stateData));
 		this->states->push(new PlayGameState(this->stateData));
 	}
 
 	//Nastavitve
 	if (this->buttons["SETTINGS_STATE"]->isPressed()){
+		this->click.play();
 		this->states->push(new SettingsState(stateData));
 		this->resetGui();
 	}
 
 	//Editor
 	if (this->buttons["EDITOR_STATE"]->isPressed()){
+		this->click.play();
 		this->states->push(new EditorState(this->stateData));
 	}
 
 	//Exit
 	if (this->buttons["EXIT_STATE"]->isPressed()){
+		this->click.play();
 		this->endState();
 	}
 }

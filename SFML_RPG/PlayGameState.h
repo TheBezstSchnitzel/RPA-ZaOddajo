@@ -15,6 +15,10 @@ private:
 	std::map<std::string, gui::Button*> buttons;
 	std::map<std::string, sf::Text> texts;
 
+	//Zvok
+	sf::SoundBuffer buffer;
+	sf::Sound click;
+
 	//Privatne funkcije
 	void initFonts();
 	void initKeybinds();

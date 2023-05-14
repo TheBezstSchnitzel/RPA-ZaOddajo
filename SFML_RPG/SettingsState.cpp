@@ -3,6 +3,10 @@
 
 void SettingsState::initVariables(){
 	this->modes = sf::VideoMode::getFullscreenModes();
+	if (!this->buffer.loadFromFile("Resources/Audio/click.wav")) {
+		throw "ERROR::MAIN_MENU_STATE::FAILED_TO_LOAD_CLICK_SOUND";
+	}
+	this->click.setBuffer(this->buffer);
 }
 
 void SettingsState::initFonts(){
@@ -141,12 +145,14 @@ void SettingsState::updateGui(const float & dt){
 	//Delovanje gumbou
 	//Zapre game
 	if (this->buttons["BACK"]->isPressed()){
+		this->click.play();
 		this->endState();
 	}
 
 	//Applya settinge
 	if (this->buttons["APPLY"]->isPressed()){
 		//TEST
+		this->click.play();
 		this->stateData->gfxSettings->resolution = this->modes[this->dropDownLists["RESOLUTION"]->getActiveElementId()];
 
 		this->window->create(this->stateData->gfxSettings->resolution, this->stateData->gfxSettings->title, sf::Style::Default);
