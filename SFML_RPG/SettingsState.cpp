@@ -43,6 +43,16 @@ void SettingsState::initGui(){
 
 	this->background.setTexture(&this->backgroundTexture);
 
+	//Ozadje za Gumbe
+	this->btnBackground.setSize(
+		sf::Vector2f(
+			static_cast<float>(vm.width / 1.34f),
+			static_cast<float>(vm.height)
+		)
+	);
+	this->btnBackground.setPosition(gui::p2pX(11.5f, vm), 0.f);
+	this->btnBackground.setFillColor(sf::Color(10, 10, 10, 220));
+
 	//Gumbi
 	this->buttons["BACK"] = new gui::Button(
 		gui::p2pX(72.f, vm), gui::p2pY(81.5f, vm),
@@ -66,14 +76,14 @@ void SettingsState::initGui(){
 
 	//Spustni seznam
 	this->dropDownLists["RESOLUTION"] = new gui::DropDownList(
-		gui::p2pX(42.f, vm), gui::p2pY(42.f, vm),
+		gui::p2pX(42.f, vm), gui::p2pY(25.3f, vm),
 		gui::p2pX(10.4f, vm), gui::p2pY(4.5f, vm),
 		font, modes_str.data(), modes_str.size()
 	);
 
 	//Inicializacija teksta
 	this->optionsText.setFont(this->font);
-	this->optionsText.setPosition(sf::Vector2f(gui::p2pX(5.2f, vm), gui::p2pY(41.7f, vm)));
+	this->optionsText.setPosition(sf::Vector2f(gui::p2pX(18.f, vm), gui::p2pY(25.f, vm)));
 	this->optionsText.setCharacterSize(gui::calcCharSize(vm, 70));
 	this->optionsText.setFillColor(sf::Color(255, 255, 255, 200));
 
@@ -117,7 +127,7 @@ SettingsState::~SettingsState(){
 	}
 }
 
-//Functions
+//Funkcije
 void SettingsState::updateInput(const float & dt){
 }
 
@@ -172,6 +182,7 @@ void SettingsState::render(sf::RenderTarget* target){
 		target = this->window;
 
 	target->draw(this->background);
+	target->draw(this->btnBackground);
 
 	this->renderGui(*target);
 

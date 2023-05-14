@@ -8,6 +8,7 @@ private:
 	//Lastnosti
 	sf::Texture backgroundTexture;
 	sf::RectangleShape background;
+	sf::RectangleShape btnBackground;
 	sf::Font font;
 
 	std::map<std::string, gui::Button*> buttons;

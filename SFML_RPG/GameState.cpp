@@ -356,7 +356,7 @@ void GameState::render(sf::RenderTarget* target){
 	}
 
 	//Debug tekst
-	this->renderTexture.draw(this->debugText);
+	//this->renderTexture.draw(this->debugText);
 
 	//Koncni render
 	this->renderTexture.display();
