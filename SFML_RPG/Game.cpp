@@ -96,7 +96,7 @@ Game::~Game(){
 
 //Funkcije
 void Game::endApplication(){
-	std::cout << "Ending Application!" << "\n";
+	//std::cout << "Ending Application!" << "\n";
 }
 
 void Game::updateDt(){
