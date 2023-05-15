@@ -72,6 +72,13 @@ void SettingsState::initGui(){
 		sf::Color(70, 70, 70, 200), sf::Color(250, 250, 250, 250), sf::Color(20, 20, 20, 50),
 		sf::Color(100, 100, 100, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0));
 
+	this->buttons["SOUND_SWITCH"] = new gui::Button(
+		gui::p2pX(68.5f, vm), gui::p2pY(10.f, vm),
+		gui::p2pX(13.f, vm), gui::p2pY(6.f, vm),
+		&this->font, "Sound: on/off", gui::calcCharSize(vm),
+		sf::Color(255, 255, 255, 255), sf::Color(255, 255, 255, 200), sf::Color(255, 255, 255, 150),
+		sf::Color(0, 0, 0, 0), sf::Color(0, 0, 0, 0), sf::Color(0, 0, 0, 0));
+
 	//Modi
 	std::vector<std::string> modes_str;
 	for (auto &i : this->modes){
@@ -112,11 +119,14 @@ void SettingsState::resetGui(){
 	this->initGui();
 }
 
-SettingsState::SettingsState(StateData* state_data) : State(state_data){
+SettingsState::SettingsState(StateData* state_data, Game* game) : State(state_data){
 	this->initVariables();
 	this->initFonts();
 	this->initKeybinds();
 	this->initGui();
+	this->sound = 1;
+	//this->rel = 1;
+	this->game=game;
 }
 
 SettingsState::~SettingsState(){
@@ -148,7 +158,19 @@ void SettingsState::updateGui(const float & dt){
 		this->click.play();
 		this->endState();
 	}
-
+	//Sound switch
+	if (this->buttons["SOUND_SWITCH"]->isPressed()) { // ne dela lih najbuls
+		if (sound) {
+			this->game->playTheme(false);
+			sound = !sound;
+			this->click.play();
+		}
+		else {
+			this->game->playTheme(true);
+			sound = !sound;
+			this->click.play();
+		}
+	}
 	//Applya settinge
 	if (this->buttons["APPLY"]->isPressed()){
 		//TEST

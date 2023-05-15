@@ -2,9 +2,13 @@
 
 #include "State.h"
 #include "Gui.h"
+#include "Game.h"
+
+class Game;
 
 class SettingsState : public State{
 private:
+	Game* game;
 	//Lastnosti
 	sf::Texture backgroundTexture;
 	sf::RectangleShape background;
@@ -12,6 +16,7 @@ private:
 	sf::Font font;
 
 	//Zvok
+	bool sound;
 	sf::SoundBuffer buffer;
 	sf::Sound click;
 
@@ -30,7 +35,7 @@ private:
 	void resetGui();
 
 public:
-	SettingsState(StateData* state_data);
+	SettingsState(StateData* state_data, Game* game);
 	virtual ~SettingsState();
 	//Funkcije
 	void updateInput(const float& dt);

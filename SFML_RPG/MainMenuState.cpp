@@ -140,7 +140,7 @@ void MainMenuState::updateButtons(){
 	//Nastavitve
 	if (this->buttons["SETTINGS_STATE"]->isPressed()){
 		this->click.play();
-		this->states->push(new SettingsState(stateData));
+		this->states->push(new SettingsState(stateData,game));
 		this->resetGui();
 	}
 
