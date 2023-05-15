@@ -75,7 +75,7 @@ void GameState::initPauseMenu(){
 	const sf::VideoMode& vm = this->stateData->gfxSettings->resolution;
 	this->pmenu = new PauseMenu(this->stateData->gfxSettings->resolution, this->font);
 
-	this->pmenu->addButton("SAVE", gui::p2pY(65.f, vm), gui::p2pX(13.f, vm), gui::p2pY(6.f, vm), gui::calcCharSize(vm), "Save");
+	this->pmenu->addButton("SAVE", gui::p2pY(60.f, vm), gui::p2pX(13.f, vm), gui::p2pY(6.f, vm), gui::calcCharSize(vm), "Save");
 	this->pmenu->addButton("QUIT", gui::p2pY(74.f, vm), gui::p2pX(13.f, vm), gui::p2pY(6.f, vm), gui::calcCharSize(vm), "Quit");
 }
 
@@ -99,6 +99,12 @@ void GameState::initDebugText(){
 
 void GameState::initPlayers(){
 	this->player = new Player(300, 220, this->textures["PLAYER_SHEET"]);
+	std::ifstream saveFile;
+	saveFile.open(this->savePath, std::ios::in);
+	if (saveFile.is_open()) {
+		saveFile.read((char*)&this->player, sizeof(Player));
+	}
+	else std::cout << "Nalaganje iz save ne dela" << std::endl;
 }
 
 void GameState::initPlayerGUI(){
@@ -118,7 +124,7 @@ void GameState::initSystems(){
 }
 
 //Konstruktor / destruktor
-GameState::GameState(StateData* state_data,Game*game) : State(state_data){
+GameState::GameState(StateData* state_data,Game*game, unsigned short save) : State(state_data){
 	this->initDeferredRender();
 	this->initView();
 	this->initKeybinds();
@@ -133,6 +139,7 @@ GameState::GameState(StateData* state_data,Game*game) : State(state_data){
 	this->initEnemySystem();
 	this->initTileMap();
 	this->initSystems();
+	this->savePath = "Saves/save" + std::to_string(save) + ".txt";
 	this->game = game;
 }
 
@@ -219,6 +226,15 @@ void GameState::updatePlayerGUI(const float & dt){
 }
 
 void GameState::updatePauseMenuButtons(){
+	std::ofstream saveFile;
+	if (this->pmenu->isButtonPressed("SAVE")) {
+		saveFile.open(this->savePath,std::ios::binary | std::ios::out);
+		if (saveFile.is_open()) {
+			saveFile.write((char*)&player, sizeof(Player));
+		}
+		else std::cout << "ERROR::CANT::OPEN::SAVE::FILE" << std::endl;
+		saveFile.close();
+	}
 	if (this->pmenu->isButtonPressed("QUIT"))
 		this->endState();
 }

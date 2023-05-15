@@ -18,6 +18,7 @@
 #include <fstream>
 #include <cmath>
 #include <ctime>
+#include <chrono>
 
 //SFML
 #include <SFML\System.hpp>

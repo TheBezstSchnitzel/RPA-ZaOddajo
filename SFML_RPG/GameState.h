@@ -13,6 +13,7 @@ class Game;
 class GameState : public State{
 private:
 	Game* game;
+	std::string savePath;
 
 	sf::View view;
 	sf::Vector2i viewGridPosition;
@@ -60,7 +61,7 @@ private:
 	void initSystems();
 
 public:
-	GameState(StateData* state_data, Game* game);
+	GameState(StateData* state_data, Game* game, unsigned short save);
 	virtual ~GameState();
 
 	//Dostop

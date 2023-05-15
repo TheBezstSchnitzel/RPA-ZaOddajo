@@ -97,32 +97,63 @@ void PlayGameState::initKeyTime() {
 	this->keytimeMax = 0.75f;
 }
 
+std::string PlayGameState::whatTime(){
+	auto time = std::chrono::system_clock::now();
+	std::time_t end_time = std::chrono::system_clock::to_time_t(time);
+	std::cout << std::ctime(&end_time) << std::endl;
+	return std::string(std::ctime(&end_time));
+}
+
 void PlayGameState::initTexts(const sf::VideoMode& vm) {
 	//Inicializacija teksta
+	// Save1
+	this->texts["SAVE1"].setFont(this->font);
+	this->texts["SAVE1"].setPosition(sf::Vector2f(gui::p2pX(31.f, vm), gui::p2pY(20.f, vm)));
+	this->texts["SAVE1"].setCharacterSize(gui::calcCharSize(vm, 70));
+	this->texts["SAVE1"].setFillColor(sf::Color(0, 0, 0, 255));
+	this->texts["SAVE1"].setString("  Save #1:");
 	//1
 	this->texts["SAVE_1"].setFont(this->font);
-	this->texts["SAVE_1"].setPosition(sf::Vector2f(gui::p2pX(31.f, vm), gui::p2pY(20.f, vm)));
+	this->texts["SAVE_1"].setPosition(sf::Vector2f(gui::p2pX(24.5f, vm), gui::p2pY(25.f, vm)));
 	this->texts["SAVE_1"].setCharacterSize(gui::calcCharSize(vm, 70));
 	this->texts["SAVE_1"].setFillColor(sf::Color(0, 0, 0, 255));
-	this->texts["SAVE_1"].setString("  Save #1: \n 0-0-0-0");
+	this->texts["SAVE_1"].setString("                0-0-0-0");
+	// Save2
+	this->texts["SAVE2"].setFont(this->font);
+	this->texts["SAVE2"].setPosition(sf::Vector2f(gui::p2pX(62.f, vm), gui::p2pY(20.f, vm)));
+	this->texts["SAVE2"].setCharacterSize(gui::calcCharSize(vm, 70));
+	this->texts["SAVE2"].setFillColor(sf::Color(0, 0, 0, 255));
+	this->texts["SAVE2"].setString("  Save #2:");
 	//2
 	this->texts["SAVE_2"].setFont(this->font);
-	this->texts["SAVE_2"].setPosition(sf::Vector2f(gui::p2pX(62.f, vm), gui::p2pY(20.f, vm)));
+	this->texts["SAVE_2"].setPosition(sf::Vector2f(gui::p2pX(55.5f, vm), gui::p2pY(25.f, vm)));
 	this->texts["SAVE_2"].setCharacterSize(gui::calcCharSize(vm, 70));
 	this->texts["SAVE_2"].setFillColor(sf::Color(0, 0, 0, 255));
-	this->texts["SAVE_2"].setString("  Save #2: \n 0-0-0-0");
+	this->texts["SAVE_2"].setString("                0-0-0-0");
+	// Save3
+	this->texts["SAVE3"].setFont(this->font);
+	this->texts["SAVE3"].setPosition(sf::Vector2f(gui::p2pX(31.f, vm), gui::p2pY(54.f, vm)));
+	this->texts["SAVE3"].setCharacterSize(gui::calcCharSize(vm, 70));
+	this->texts["SAVE3"].setFillColor(sf::Color(0, 0, 0, 255));
+	this->texts["SAVE3"].setString("  Save #3:");
 	//3
 	this->texts["SAVE_3"].setFont(this->font);
-	this->texts["SAVE_3"].setPosition(sf::Vector2f(gui::p2pX(31.f, vm), gui::p2pY(54.f, vm)));
+	this->texts["SAVE_3"].setPosition(sf::Vector2f(gui::p2pX(24.5f, vm), gui::p2pY(59.f, vm)));
 	this->texts["SAVE_3"].setCharacterSize(gui::calcCharSize(vm, 70));
 	this->texts["SAVE_3"].setFillColor(sf::Color(0, 0, 0, 255));
-	this->texts["SAVE_3"].setString("  Save #3: \n 0-0-0-0");
+	this->texts["SAVE_3"].setString("                0-0-0-0");
+	// Save4
+	this->texts["SAVE4"].setFont(this->font);
+	this->texts["SAVE4"].setPosition(sf::Vector2f(gui::p2pX(62.f, vm), gui::p2pY(54.f, vm)));
+	this->texts["SAVE4"].setCharacterSize(gui::calcCharSize(vm, 70));
+	this->texts["SAVE4"].setFillColor(sf::Color(0, 0, 0, 255));
+	this->texts["SAVE4"].setString("  Save #4:");
 	//4
 	this->texts["SAVE_4"].setFont(this->font);
-	this->texts["SAVE_4"].setPosition(sf::Vector2f(gui::p2pX(62.f, vm), gui::p2pY(54.f, vm)));
+	this->texts["SAVE_4"].setPosition(sf::Vector2f(gui::p2pX(56.5f, vm), gui::p2pY(59.f, vm)));
 	this->texts["SAVE_4"].setCharacterSize(gui::calcCharSize(vm, 70));
 	this->texts["SAVE_4"].setFillColor(sf::Color(0, 0, 0, 255));
-	this->texts["SAVE_4"].setString("  Save #4: \n 0-0-0-0");
+	this->texts["SAVE_4"].setString("                0-0-0-0");
 }
 
 void PlayGameState::initGui(){
@@ -200,6 +231,24 @@ PlayGameState::~PlayGameState(){
 	}
 }
 
+void PlayGameState::updateTexts(unsigned short i){
+	std::string tmp=this->whatTime();
+	switch (i){
+	case 1:
+		this->texts["SAVE_1"].setString(tmp);
+		break;
+	case 2:
+		this->texts["SAVE_2"].setString(tmp);
+		break;
+	case 3:
+		this->texts["SAVE_3"].setString(tmp);
+		break;
+	case 4:
+		this->texts["SAVE_4"].setString(tmp);
+		break;
+	}
+}
+
 void PlayGameState::updateButtons() {
 	//Updata gumbe
 	for (auto& it : this->buttons) {
@@ -210,22 +259,26 @@ void PlayGameState::updateButtons() {
 	if (this->buttons["GAME_SAVE_1"]->isPressed()) {
 		this->click.play();
 		this->game->playTheme(false);
-		this->states->push(new GameState(this->stateData,this->game));
+		this->states->push(new GameState(this->stateData,this->game,1));
+		this->updateTexts(1);
 	}
 	if (this->buttons["GAME_SAVE_2"]->isPressed()) {
 		this->click.play();
 		this->game->playTheme(false);
-		this->states->push(new GameState(this->stateData,this->game));
+		this->states->push(new GameState(this->stateData,this->game,2));
+		this->updateTexts(2);
 	}
 	if (this->buttons["GAME_SAVE_3"]->isPressed()) {
 		this->click.play();
 		this->game->playTheme(false);
-		this->states->push(new GameState(this->stateData,this->game));
+		this->states->push(new GameState(this->stateData,this->game,3));
+		this->updateTexts(3);
 	}
 	if (this->buttons["GAME_SAVE_4"]->isPressed()) {
 		this->click.play();
 		this->game->playTheme(false);
-		this->states->push(new GameState(this->stateData,this->game));
+		this->states->push(new GameState(this->stateData,this->game,4));
+		this->updateTexts(4);
 	}
 	//Exit
 	if (this->buttons["EXIT"]->isPressed()) {

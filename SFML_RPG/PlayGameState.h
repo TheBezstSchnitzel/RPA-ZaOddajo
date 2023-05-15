@@ -30,6 +30,7 @@ private:
 	void initTexts(const sf::VideoMode& vm);
 	void initGui();
 	void initKeyTime();
+	std::string whatTime();
 	void resetGui();
 
 public:
@@ -37,6 +38,7 @@ public:
 	virtual ~PlayGameState();
 
 	//funkcije
+	void updateTexts(unsigned short i);
 	void updateButtons();
 	void update(const float& dt);
 	void renderButtons(sf::RenderTarget& target);
