@@ -41,15 +41,15 @@ void Game::initWindow(){
 void Game::initKeys(){
 	std::ifstream ifs("Config/supported_keys.ini");
 
-	if (ifs.is_open()){
+	if (ifs.is_open()) {
+		if (ifs.fail())initKeys(); //rekurzivna funkcija
 		std::string key = "";
 		int key_value = 0;
-		
-		while (ifs >> key >> key_value){
+
+		while (ifs >> key >> key_value) {
 			this->supportedKeys[key] = key_value;
 		}
 	}
-
 	ifs.close();
 	/*
 	* //DEBUG
