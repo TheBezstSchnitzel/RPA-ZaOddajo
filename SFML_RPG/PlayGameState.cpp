@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "PlayGameState.h"
+#include "Game.h"
 
 void PlayGameState::initFonts(){
 	if (!this->font.loadFromFile("Fonts/Dosis-Light.ttf")) {
@@ -184,11 +185,12 @@ void PlayGameState::resetGui(){
 }
 
 
-PlayGameState::PlayGameState(StateData* state_data) : State(state_data){
+PlayGameState::PlayGameState(StateData* state_data,Game* game) : State(state_data) {
 	this->initFonts();
 	this->initKeyTime();
 	this->initKeybinds();
 	this->initGui();
+	this->game = game;
 }
 
 PlayGameState::~PlayGameState(){
@@ -207,19 +209,23 @@ void PlayGameState::updateButtons() {
 	//Nou game
 	if (this->buttons["GAME_SAVE_1"]->isPressed()) {
 		this->click.play();
-		this->states->push(new GameState(this->stateData));
+		this->game->playTheme(false);
+		this->states->push(new GameState(this->stateData,this->game));
 	}
 	if (this->buttons["GAME_SAVE_2"]->isPressed()) {
 		this->click.play();
-		this->states->push(new GameState(this->stateData));
+		this->game->playTheme(false);
+		this->states->push(new GameState(this->stateData,this->game));
 	}
 	if (this->buttons["GAME_SAVE_3"]->isPressed()) {
 		this->click.play();
-		this->states->push(new GameState(this->stateData));
+		this->game->playTheme(false);
+		this->states->push(new GameState(this->stateData,this->game));
 	}
 	if (this->buttons["GAME_SAVE_4"]->isPressed()) {
 		this->click.play();
-		this->states->push(new GameState(this->stateData));
+		this->game->playTheme(false);
+		this->states->push(new GameState(this->stateData,this->game));
 	}
 	//Exit
 	if (this->buttons["EXIT"]->isPressed()) {

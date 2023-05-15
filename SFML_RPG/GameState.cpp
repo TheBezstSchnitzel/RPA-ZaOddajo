@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "GameState.h"
+#include "Game.h"
 
 //Inicializacija
 void GameState::initDeferredRender(){
@@ -116,7 +117,7 @@ void GameState::initSystems(){
 }
 
 //Konstruktor / destruktor
-GameState::GameState(StateData* state_data) : State(state_data){
+GameState::GameState(StateData* state_data,Game*game) : State(state_data){
 	this->initDeferredRender();
 	this->initView();
 	this->initKeybinds();
@@ -131,7 +132,7 @@ GameState::GameState(StateData* state_data) : State(state_data){
 	this->initEnemySystem();
 	this->initTileMap();
 	this->initSystems();
-	this->player->gainHP(100);
+	this->game = game;
 }
 
 GameState::~GameState(){
@@ -141,7 +142,7 @@ GameState::~GameState(){
 	delete this->enemySystem;
 	delete this->tileMap;
 	delete this->tts;
-
+	this->game->playTheme(true);
 	for (size_t i = 0; i < this->activeEnemies.size(); i++){
 		delete this->activeEnemies[i];
 	}

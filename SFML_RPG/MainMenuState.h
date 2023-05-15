@@ -6,8 +6,11 @@
 #include "Gui.h"
 #include "PlayGameState.h"
 
+class Game;
+
 class MainMenuState : public State{
 private:
+	Game* game;
 	//Lastnosti
 	sf::Texture backgroundTexture;
 	sf::RectangleShape background;
@@ -29,7 +32,7 @@ private:
 
 public:
 	//konstruktor / destruktor
-	MainMenuState(StateData* state_data);
+	MainMenuState(StateData* state_data,Game*game);
 	virtual ~MainMenuState();
 
 	//Funkcije

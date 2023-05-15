@@ -8,8 +8,12 @@
 #include "Bow.h"
 #include "TextTagSystem.h"
 
+class Game;
+
 class GameState : public State{
 private:
+	Game* game;
+
 	sf::View view;
 	sf::Vector2i viewGridPosition;
 	sf::RenderTexture renderTexture;
@@ -56,7 +60,7 @@ private:
 	void initSystems();
 
 public:
-	GameState(StateData* state_data);
+	GameState(StateData* state_data, Game* game);
 	virtual ~GameState();
 
 	//Dostop

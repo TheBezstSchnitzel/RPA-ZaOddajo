@@ -100,7 +100,7 @@ void MainMenuState::resetGui(){
 	this->initGui();
 }
 //Konstruktor
-MainMenuState::MainMenuState(StateData* state_data) : State(state_data){
+MainMenuState::MainMenuState(StateData* state_data,Game*game) : State(state_data),game(game){
 	this->initVariables();
 	this->initFonts();
 	this->initKeybinds();
@@ -134,8 +134,7 @@ void MainMenuState::updateButtons(){
 	//Nou game
 	if (this->buttons["GAME_STATE"]->isPressed()){
 		this->click.play();
-		//this->states->push(new GameState(this->stateData));
-		this->states->push(new PlayGameState(this->stateData));
+		this->states->push(new PlayGameState(this->stateData,game));
 	}
 
 	//Nastavitve

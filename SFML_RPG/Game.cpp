@@ -8,6 +8,11 @@ void Game::initVariables(){
 	this->dt = 0.f;
 
 	this->gridSize = 64.f;
+
+	//this->theme.openFromFile("Resources/Audio/themeSong.wav");
+	//theme.setPitch(1.f);
+	//theme.setVolume(50.f);
+	//theme.setLoop(true);
 }
 
 void Game::initGraphicsSettings(){
@@ -62,7 +67,7 @@ void Game::initStateData(){
 }
 
 void Game::initStates(){
-	this->states.push(new MainMenuState(&this->stateData));
+	this->states.push(new MainMenuState(&this->stateData,this));
 }
 
 //Konstruktor / Destruktor
@@ -73,6 +78,11 @@ Game::Game(){
 	this->initKeys();
 	this->initStateData();
 	this->initStates();
+	theme.openFromFile("Resources/Audio/themeSong.wav");
+	theme.setPitch(1.f);
+	theme.setVolume(50.f);
+	theme.setLoop(true);
+	theme.play();
 }
 
 Game::~Game(){
@@ -103,7 +113,6 @@ void Game::updateSFMLEvents(){
 
 void Game::update(){
 	this->updateSFMLEvents();
-
 	if (!this->states.empty()){
 		if (this->window->hasFocus()){
 			this->states.top()->update(this->dt);
@@ -120,6 +129,22 @@ void Game::update(){
 		this->endApplication();
 		this->window->close();
 	}
+}
+
+void Game::playTheme(bool what){
+	if (what)
+		theme.play();
+	else
+		theme.pause();
+}
+
+void Game::restartTheme(bool go){
+	if (go) {
+		theme.stop();
+		theme.play();
+	}
+	else
+		theme.stop();
 }
 
 void Game::render(){

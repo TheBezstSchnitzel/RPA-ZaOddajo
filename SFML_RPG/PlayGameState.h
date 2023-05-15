@@ -5,8 +5,11 @@
 #include "SettingsState.h"
 #include "Gui.h"
 
+class Game;
+
 class PlayGameState : public State{
 private:
+	Game* game;
 	//Lastnosti
 	sf::Font font;
 
@@ -30,7 +33,7 @@ private:
 	void resetGui();
 
 public:
-	PlayGameState(StateData* state_data);
+	PlayGameState(StateData* state_data,Game* game);
 	virtual ~PlayGameState();
 
 	//funkcije

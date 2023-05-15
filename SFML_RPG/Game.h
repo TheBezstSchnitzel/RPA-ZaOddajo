@@ -19,6 +19,9 @@ private:
 
 	float gridSize;
 
+	//Tematska pesem
+	sf::Music theme;
+
 	//Inicializacija
 	void initVariables();
 	void initGraphicsSettings();
@@ -40,6 +43,10 @@ public:
 	void updateDt();
 	void updateSFMLEvents();
 	void update();
+
+	//Zvok
+	void playTheme(bool what=true);
+	void restartTheme(bool go=true);
 
 	//Render
 	void render();
