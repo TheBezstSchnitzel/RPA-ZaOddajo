@@ -33,7 +33,7 @@ Bird1::Bird1(float x, float y, sf::Texture& texture_sheet, EnemySpawnerTile& ene
 	this->createHitboxComponent(this->sprite, 15.f, 15.f, 30.f, 30.f);
 	this->createMovementComponent(250.f, 350.f, 50.f);
 	this->createAnimationComponent(texture_sheet);
-	this->createAttributeComponent(1);
+	this->createAttributeComponent(1,8,8);
 
 	this->generateAttributes(this->attributeComponent->level);
 

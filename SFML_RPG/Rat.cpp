@@ -33,7 +33,7 @@ Rat::Rat(float x, float y, sf::Texture& texture_sheet, EnemySpawnerTile& enemy_s
 	this->createHitboxComponent(this->sprite, 13.f, 39.f, 30.f, 30.f);
 	this->createMovementComponent(70.f, 800.f, 500.f);
 	this->createAnimationComponent(texture_sheet);
-	this->createAttributeComponent(1);
+	this->createAttributeComponent(1,6,6);
 
 	this->generateAttributes(this->attributeComponent->level);
 

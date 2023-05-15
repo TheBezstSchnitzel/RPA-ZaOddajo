@@ -1,11 +1,12 @@
 #include "stdafx.h"
 #include "AttributeComponent.h"
 
-AttributeComponent::AttributeComponent(int level){
+AttributeComponent::AttributeComponent(int level, int startHP, int maxHP){
 	this->level = level;
 	this->exp = 0;
 	this->expNext = (50 * pow(this->level, 3) - 150 * pow(this->level, 2) + (UINT64)400 * this->level) / 3;
 	this->attributePoints = 2;
+
 
 	this->vitality = 1;
 	this->strength = 1;
@@ -15,6 +16,8 @@ AttributeComponent::AttributeComponent(int level){
 
 	this->updateLevel();
 	this->updateStats(true);
+	this->hpMax = maxHP;
+	this->hp = startHP;
 }
 
 AttributeComponent::~AttributeComponent(){
@@ -83,6 +86,7 @@ void AttributeComponent::updateLevel(){
 		this->exp -= this->expNext;
 		this->expNext = (50 * pow(this->level, 3) - 150 * pow(this->level, 2) + (UINT64)400 * this->level) / 3;
 		++this->attributePoints;
+		this->updateStats(true);
 	}
 }
 

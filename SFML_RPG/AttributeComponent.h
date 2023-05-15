@@ -25,7 +25,7 @@ public:
 	int luck;
 
 	//Konstruktor / Destruktor
-	AttributeComponent(int level);
+	AttributeComponent(int level, int startHP, int maxHP);
 	virtual ~AttributeComponent();
 
 	//Funkcije
